@@ -8,7 +8,7 @@ export default {
     /**
      * Web application port
      */
-    port: parseInt(process.env.PORT, 10),
+    port: parseInt(process.env.PORT || '8080', 10),
 
     /**
      * Used to set logging level of winston
@@ -21,20 +21,20 @@ export default {
      * Used to set api prefix
      */
     api: {
-        prefix: process.env.API_PREFIX,
+        prefix: process.env.API_PREFIX || '/api',
         /**
          * Used to set swagger api location
          */
-        swagger: process.env.SWAGGER_PREFIX,
+        swagger: process.env.SWAGGER_PREFIX || '/swagger',
     },
 
     vapid: {
-        public: process.env.PUBLIC_VAPID_KEY,
-        private: process.env.PRIVATE_VAPID_KEY,
+        public: process.env.PUBLIC_VAPID_KEY || '',
+        private: process.env.PRIVATE_VAPID_KEY || '',
     },
 
     facebook: {
-        api_id: process.env.FACEBOOK_API_ID,
-        api_secret: process.env.FACEBOOK_API_SECRET,
+        api_id: process.env.FACEBOOK_API_ID || '',
+        api_secret: process.env.FACEBOOK_API_SECRET || '',
     },
 };

@@ -1,8 +1,9 @@
 import { Router, Request, Response } from 'express';
 import Logger from '../../loaders/logger';
-import https from 'https';
 import config from '../../config';
-import { IncomingMessage } from 'http';
+import { TYPES } from '../../config/types';
+import Container from '../../config/inversify.config';
+import { ICurlService } from '../common/curl.interface';
 
 const route = Router();
 export class SocialApi {
@@ -31,7 +32,7 @@ export class SocialApi {
                 );
             } else {
                 Logger.info('Code received:' + req.query.code);
-                // TODO: perform state challenge. Make the final code with received one-time code
+                // TODO: perform state challenge. Make the final curl call to facebook service with received one-time code
                 const url =
                     'https://graph.facebook.com/v5.0/oauth/access_token?' +
                     `client_id=${config.facebook.api_id}` +
@@ -39,33 +40,12 @@ export class SocialApi {
                     `&client_secret=${config.facebook.api_secret}` +
                     `&code=${req.query.code}`;
                 Logger.info(url);
-                const response = await SocialApi.httpRequest(url);
-                Logger.info(response);
+                const response = await Container.get<ICurlService>(TYPES.ICurlService).get(url);
+                Logger.info(JSON.stringify(response)); // Inside response I can find the access token, used to retrieve data
             }
 
             // Always redirect
             res.redirect('/');
         });
-    }
-
-    static async httpRequest(url: string): Promise<Object> {
-        let a = new Promise((resolve, reject) => {
-            https.get(url, res => {
-                res.setEncoding('utf8');
-                let body = '';
-                res.on('data', data => {
-                    body += data;
-                });
-                res.on('end', () => {
-                    body = JSON.parse(body);
-                    resolve(body);
-                });
-                res.on('error', err => {
-                    reject(err);
-                });
-            });
-        });
-
-        return a;
     }
 }

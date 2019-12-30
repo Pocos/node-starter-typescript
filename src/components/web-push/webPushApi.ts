@@ -25,7 +25,7 @@ export class WebPushApi {
             const subscription = WebPushRepo.getSubscription();
             const payload = JSON.stringify({ title: 'test' });
             res.status(200).json({ test: 'test' });
-            webpush.sendNotification(subscription, payload).catch(error => {
+            webpush.sendNotification(subscription, payload).catch((error: Error) => {
                 console.error(error);
             });
         });

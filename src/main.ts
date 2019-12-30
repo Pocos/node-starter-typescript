@@ -10,11 +10,10 @@ import Logger from './loaders/logger';
  */
 const app = loaders();
 
-const server = app.listen(config.port, err => {
+const server = app.listen(config.port, (err: Error) => {
     if (err) {
         Logger.error(err);
         process.exit(1);
-        return;
     }
     Logger.info(`
       ################################################
