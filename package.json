@@ -1,0 +1,59 @@
+{
+    "name": "node-starter-typescript",
+    "version": "0.0.1",
+    "description": "A node starter kit for typescript",
+    "main": "src/main.ts",
+    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags",
+    "scripts": {
+        "build": "gulp build",
+        "start": "nodemon",
+        "debug": "nodemon --inspect src/main.ts",
+        "test": "jest --watchAll",
+        "coverage": "jest --coverage",
+        "lint": "npm run lint:js ",
+        "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",
+        "lint:js": "npm run lint:eslint src/",
+        "lint:fix": "npm run lint:js -- --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.betacom.it/apocorobba/node-starter-typescript.git"
+    },
+    "author": "a.pocorobba@betacom.it",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "celebrate": "^10.1.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-jwt": "^5.3.1",
+        "express-static": "^1.2.6",
+        "helmet": "^3.21.2",
+        "swagger-ui-express": "^4.1.2",
+        "web-push": "^3.4.2",
+        "winston": "^3.2.1"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.2",
+        "@types/hapi__joi": "^16.0.3",
+        "@types/helmet": "0.0.45",
+        "@types/jest": "^24.0.22",
+        "@types/node": "^12.12.6",
+        "@types/supertest": "^2.0.8",
+        "@typescript-eslint/eslint-plugin": "^2.6.1",
+        "@typescript-eslint/parser": "^2.6.1",
+        "eslint": "^6.6.0",
+        "eslint-config-prettier": "^6.5.0",
+        "eslint-plugin-prettier": "^3.1.1",
+        "gulp": "^4.0.2",
+        "gulp-typescript": "^5.0.1",
+        "jest": "^24.9.0",
+        "nodemon": "^1.19.4",
+        "prettier": "^1.19.1",
+        "supertest": "^4.0.2",
+        "ts-jest": "^24.1.0",
+        "ts-node": "^8.4.1",
+        "typescript": "^3.7.2"
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Typescript starter",
+        "description": "",
+        "version": "1.0"
+    },
+    "produces": ["application/json"],
+    "paths": {
+        "/status": {
+            "get": {
+                "x-swagger-router-controller": "home",
+                "operationId": "index",
+                "tags": ["status"],
+                "description": "Verify server status",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "head": {
+                "tags": ["status"],
+                "description": "Verify server status",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "x-swagger-router-controller": "home",
+                "operationId": "index",
+                "tags": ["login"],
+                "description": "Login",
+                "parameters": [
+                    { "name": "email", "in": "body", "required": true, "type": "string" },
+                    { "name": "password", "in": "body", "required": true, "type": "string" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
