@@ -30,6 +30,11 @@ export default {
 
     vapid: {
         public: process.env.PUBLIC_VAPID_KEY,
-        private: process.env.PRIVATE_VAPID_KEY
-    }
+        private: process.env.PRIVATE_VAPID_KEY,
+    },
+
+    facebook: {
+        api_id: process.env.FACEBOOK_API_ID,
+        api_secret: process.env.FACEBOOK_API_SECRET,
+    },
 };
