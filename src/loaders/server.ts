@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import routes from '../api';
 import middleware from '../api/middleware';
 import config from '../config';
+import express_static from 'express-static';
 
 const app = express();
 
@@ -33,8 +34,7 @@ app.use(bodyParser.json());
 // Load API routes
 app.use(config.api.prefix, routes());
 
-app.use(require('express-static')('./'));
-
+app.use(express_static('./'));
 // Error handlers
 app.use(middleware.notFoundHandler);
 app.use(middleware.parseHandler);
